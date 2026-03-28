@@ -2,7 +2,7 @@ import { createAuthClient } from "better-auth/react";
 import { inferAdditionalFields } from "better-auth/client/plugins";
 
 export const authClient = createAuthClient({
-  baseURL: import.meta.env.VITE_BACKENED_URL || "http://localhost:3000",
+  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:3000",
   plugins: [
     inferAdditionalFields({
       user: {
