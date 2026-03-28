@@ -86,7 +86,7 @@ function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-5 gap-8">
             {/* Step 1 */}
             <div className="relative">
               <div className="bg-red-50 rounded-2xl p-8 h-full">
@@ -132,11 +132,11 @@ function Index() {
                   3
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Donor Notification
+                  Get Notified
                 </h3>
                 <p className="text-gray-600">
                   Donors receive instant notifications about blood requests from
-                  nearby hospitals matching their blood type.
+                  nearby hospitals matching their blood type (when eligible).
                 </p>
               </div>
               <div className="hidden md:block absolute -right-4 top-1/2 transform -translate-y-1/2">
@@ -145,17 +145,34 @@ function Index() {
             </div>
 
             {/* Step 4 */}
-            <div>
+            <div className="relative">
               <div className="bg-purple-50 rounded-2xl p-8 h-full">
                 <div className="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-4">
                   4
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Complete & Save
+                  Complete & Start Recovery
                 </h3>
                 <p className="text-gray-600">
-                  Interested donors connect with hospitals, complete the donation
-                  process, and save a life.
+                  You complete the donation and save a life. Enjoy your well-deserved 4-month break.
+                </p>
+              </div>
+              <div className="hidden md:block absolute -right-4 top-1/2 transform -translate-y-1/2">
+                <ArrowRight className="w-8 h-8 text-gray-300" />
+              </div>
+            </div>
+
+            {/* Step 5 */}
+            <div>
+              <div className="bg-orange-50 rounded-2xl p-8 h-full">
+                <div className="w-12 h-12 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-4">
+                  5
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  Come Back Stronger
+                </h3>
+                <p className="text-gray-600">
+                  After 4 months, you're eligible again and we'll welcome you back to help more lives.
                 </p>
               </div>
             </div>
@@ -218,6 +235,25 @@ function Index() {
         </div>
       </section>
 
+      {/* Donor Benefits Section */}
+      <section className="py-16 px-4 bg-blue-50">
+        <div className="container mx-auto max-w-4xl">
+          <div className="bg-white rounded-xl p-8 border-l-4 border-blue-600">
+            <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              We Respect Your Health & Recovery
+            </h3>
+            <p className="text-gray-700 mb-4">
+              After you donate blood, your body needs time to recover and regenerate. That's why we have a 
+              <strong> 4-month cooling-off period</strong> where you won't receive any notifications or requests. 
+              This ensures you can focus on your health and recovery without any pressure.
+            </p>
+            <p className="text-gray-600 text-sm">
+              After 4 months, you're welcome to donate again, and we'll notify you when your blood type is needed in your area.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* For Donors Section */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
@@ -230,6 +266,7 @@ function Index() {
                 {[
                   "Register once with your blood type and location",
                   "Receive notifications only when your blood type is needed nearby",
+                  "4-month cooldown period after donation - no interruptions while you recover",
                   "Control your donation schedule and preferences",
                   "Track your donation history and impact",
                   "Access health guidelines and donor resources",
