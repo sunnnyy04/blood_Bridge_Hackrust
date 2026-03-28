@@ -10,7 +10,7 @@ api.get("/health", (c) => {
   });
 });
 
-api.post(`${process.env.MESSAGING_SERVICE_URL}/webhook/whatsapp`, async (c) => {
+api.post("/webhook/whatsapp", async (c) => {
   const body = await c.req.formData();
 
   const formData = new URLSearchParams();

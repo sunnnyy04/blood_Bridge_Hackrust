@@ -2,7 +2,11 @@ import "dotenv/config";
 import { drizzle } from "drizzle-orm/neon-http";
 import { mockDonors } from "./db/schema.js";
 
-const db = drizzle(process.env.DATABASE_URL as string);
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not set");
+}
+
+const db = drizzle(process.env.DATABASE_URL);
 
 const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 

@@ -9,7 +9,7 @@ import {
   bloodRequests,
   bloodRequestResponses,
 } from "./db/schema.js";
-import { eq, sql, and, or, isNull, lt } from "drizzle-orm";
+import { eq, sql, and, or, isNull, lt, inArray } from "drizzle-orm";
 import Twilio from "twilio";
 
 const app = new Hono();
@@ -110,7 +110,7 @@ app.post("/send-alert", async (c) => {
     .from(mockDonors)
     .where(and(
       eq(mockDonors.isAvailable, true),
-      sql`${mockDonors.bloodType} IN ${compatibleTypes}`,
+      inArray(mockDonors.bloodType, compatibleTypes),
       requestType === "plasma" ? eq(mockDonors.canDonatePlasma, true) : eq(mockDonors.canDonateBlood, true),
       or(
         isNull(mockDonors.lastDonatedAt),
@@ -373,7 +373,7 @@ app.get("/health", (c) => c.json({ status: "ok" }));
 serve(
   {
     fetch: app.fetch,
-    port: 3001,
+    port: Number(process.env.PORT) || 3001,
   },
   (info) => {
     console.log(`Messaging service running on http://localhost:${info.port}`);

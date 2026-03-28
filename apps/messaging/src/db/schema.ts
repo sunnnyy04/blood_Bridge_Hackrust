@@ -63,7 +63,11 @@ export const bloodRequestResponses = pgTable("blood_request_responses", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-export const db = drizzle(process.env.DATABASE_URL as string, {
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not set");
+}
+
+export const db = drizzle(process.env.DATABASE_URL, {
   schema: { mockDonors, bloodRequests, bloodRequestResponses, requestStatusEnum, requestTypeEnum },
 });
 

@@ -1,35 +1,33 @@
+import "dotenv/config";
+import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { logger } from "hono/logger";
 import api from "./routes/api.js";
 
-type Bindings = {
-  DATABASE_URL: string;
-  FRONTEND_URL: string;
-  BETTER_AUTH_SECRET: string;
-  BETTER_AUTH_URL: string;
-  TWILIO_ACCOUNT_SID: string;
-  TWILIO_AUTH_TOKEN: string;
-  TWILIO_WHATSAPP_NUMBER: string;
-  MESSAGING_SERVICE_URL: string;
-};
+const app = new Hono();
 
-const app = new Hono<{ Bindings: Bindings }>();
-
+app.use("*", logger());
 app.use(
   "*",
-  async (c, next) => {
-    const corsMiddleware = cors({
-      origin: c.env.FRONTEND_URL,
-      allowHeaders: ["Content-Type", "Authorization"],
-      allowMethods: ["POST", "GET", "OPTIONS"],
-      exposeHeaders: ["Content-Length"],
-      maxAge: 600,
-      credentials: true,
-    });
-    return corsMiddleware(c, next);
-  },
+  cors({
+    origin: "http://localhost:5173",
+    allowHeaders: ["Content-Type", "Authorization"],
+    allowMethods: ["POST", "GET", "OPTIONS"],
+    exposeHeaders: ["Content-Length"],
+    maxAge: 600,
+    credentials: true,
+  }),
 );
 
 app.route("/api", api);
 
-export default app;
+serve(
+  {
+    fetch: app.fetch,
+    port: 3000,
+  },
+  (info) => {
+    console.log(`Server is running on http://localhost:${info.port}`);
+  },
+);
