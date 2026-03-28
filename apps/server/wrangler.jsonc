@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bloodbridge-server",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-03-14",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "dev": {
+    "port": 3000
+  },
+}
