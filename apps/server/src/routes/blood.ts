@@ -37,7 +37,7 @@ function haversineDistance(
 }
 
 const MESSAGING_SERVICE_URL =
-  process.env.MESSAGING_SERVICE_URL || "http://localhost:3001";
+  process.env.MESSAGING_SERVICE_URL as string;
 
 bloodApi.post("/request", async (c) => {
   const body = await c.req.json();

@@ -18,7 +18,7 @@ api.post("/webhook/whatsapp", async (c) => {
     formData.append(key, value.toString());
   });
 
-  const response = await fetch("http://localhost:3001/webhook/whatsapp", {
+  const response = await fetch(`${process.env.MESSAGING_SERVICE_URL}/webhook/whatsapp`, {
     method: "POST",
     body: formData,
     headers: {
