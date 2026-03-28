@@ -14,7 +14,6 @@ import { Heart, Activity, MapPin, Phone, Droplets } from "lucide-react";
 export default function DonorDashboard() {
   const { data: session } = useSession();
   const [stats, setStats] = useState({ fulfilledCount: 0, isAvailable: true });
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (session?.user?.role !== "donor") {
@@ -24,7 +23,7 @@ export default function DonorDashboard() {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/donor/stats", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/donor/stats`, {
         headers: {
         }
       });
@@ -33,7 +32,6 @@ export default function DonorDashboard() {
     } catch (err) {
       console.error("Failed to fetch stats", err);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -43,7 +41,7 @@ export default function DonorDashboard() {
 
   const toggleAvailability = async (checked: boolean) => {
     try {
-      await fetch("http://localhost:3000/api/auth/donor/availability", {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/donor/availability`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isAvailable: checked })

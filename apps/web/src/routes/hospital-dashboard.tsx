@@ -79,7 +79,7 @@ export default function HospitalDashboard() {
     setLoadingDonors(true);
     try {
       const response = await fetch(
-        "http://localhost:3000/api/blood/donors/available",
+        `${import.meta.env.VITE_BACKEND_URL}/api/blood/donors/available`,
       );
       const data = await response.json();
       setAvailableDonors(data.donors || []);
@@ -93,7 +93,7 @@ export default function HospitalDashboard() {
   const fetchRequests = async () => {
     setLoadingRequests(true);
     try {
-      const response = await fetch("http://localhost:3000/api/blood/requests");
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blood/requests`);
       const data = await response.json();
 
       const sortedRequests = (data.requests || []).sort((a: BloodRequest, b: BloodRequest) => {
@@ -148,7 +148,7 @@ export default function HospitalDashboard() {
     setSuggestions(null);
 
     try {
-      const response = await fetch("http://localhost:3000/api/blood/request", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blood/request`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +190,7 @@ export default function HospitalDashboard() {
 
   const handleUpdateStatus = async (id: string, status: "complete" | "cancel") => {
     try {
-      await fetch(`http://localhost:3000/api/blood/requests/${id}/${status}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blood/requests/${id}/${status}`, {
         method: "POST",
       });
       fetchRequests();
@@ -237,7 +237,7 @@ export default function HospitalDashboard() {
             </CardHeader>
             <CardContent className="p-0">
               <BloodMap
-                hospitalCoords={[parseFloat(session.user.latitude), parseFloat(session.user.longitude)]}
+                hospitalCoords={[(session.user.latitude), (session.user.longitude)]}
                 donors={notifiedDonors}
                 searchRadius={currentRadius}
               />
